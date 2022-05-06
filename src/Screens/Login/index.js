@@ -25,7 +25,7 @@ import colors from '../../Styles/colors'
 
 const LoginScreen = ({ navigation }) => {
 
-  const [email, setEmail] = React.useState('teste@gmail.com')
+  const [email, setEmail] = React.useState('')
   const [ animation, setAnimation] = React.useState(false)
 
   console.log(email)
@@ -91,7 +91,7 @@ const LoginScreen = ({ navigation }) => {
         <MyImage
           source={require('../../Assets/Images/loginIcon.png')}
           resizeMode="contain"
-          animation={animation ? 'fadeOutRightBig' : 'pulse'}
+          animation={animation ? 'rotate' : 'pulse'}
           delay={animation ? 1000 : 100}
           iterationCount={animation ? 1 : 'infinite'}
         />

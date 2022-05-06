@@ -1,4 +1,4 @@
-import { Alert, FlatList, StatusBar } from 'react-native'
+import { Alert, ScrollView, FlatList, StatusBar, View } from 'react-native'
 import React from 'react'
 import { Text } from './styles'
 
@@ -54,9 +54,7 @@ const HomeScreen = ({ navigation, route }) => {
     const getAllExpenses = async (token) => {
 
 
-        console.log(token)
-
-        const response = await allExpenses(1, 5, token)
+        const response = await allExpenses(1, 20, token)
 
         if (response) {
             setExpenses(response)
@@ -121,9 +119,16 @@ const HomeScreen = ({ navigation, route }) => {
             key={item._id}
             expense={item}
             styleContainer={{ width: "90%", alignSelf: "center" }}
-            onPress={() => navigation.navigate('Details', { expense: item, user: user, refresh: refresh})}
+            onPress={() => navigation.navigate('Details', { expense: item, user: user, refresh: refresh })}
             onPressRemove={() => removeExpense(item)}
         />
+    );
+
+    const renderEmpty = ({ item }) => (
+        <View style={{}}>
+            <Text size={18} bold >{"A sua lista está vazia!\n Cria novas despesas."}</Text>
+        </View>
+
     );
 
     const filterExpenses = search !== '' ? expenses.filter(expense => expense.item.includes(search)) : expenses
@@ -150,7 +155,10 @@ const HomeScreen = ({ navigation, route }) => {
                     data={filterExpenses}
                     renderItem={renderItem}
                     keyExtractor={item => item._id}
+                    ListEmptyComponent={renderEmpty}
+                    style={{ height: "80%"}}
                 />
+
 
 
             </Screen>
@@ -165,7 +173,7 @@ const HomeScreen = ({ navigation, route }) => {
                 big
                 icon="plus"
                 color={colors.black}
-                onPress={() => navigation.navigate('Create', {user: user, refresh: refresh})}
+                onPress={() => navigation.navigate('Create', { user: user, refresh: refresh })}
             />
         </>
 
