@@ -57,7 +57,7 @@ const DetailsScreen = ({ route, navigation }) => {
 
     const formatarMoeda = (value) => {
 
-        valor = value + '';
+        let valor = value + '';
         valor = parseInt(valor.replace(/[\D]+/g, ''));
         valor = valor + '';
         valor = valor.replace(/([0-9]{2})$/g, ",$1");
@@ -71,7 +71,19 @@ const DetailsScreen = ({ route, navigation }) => {
 
     const submitEdit = async () => {
 
+        if (!description.length || !date.length || !value.length) {
+            showMessage({
+                message: "Falha",
+                description: "Preencha todos os campos da tela!",
+                type: "danger",
+                statusBarHeight: StatusBar.currentHeight,
+                floating: true,
+            });
+            return
+        }
 
+
+        Keyboard.dismiss
 
         const newValue = formatarMoeda(value).replace(',', '.')
 
