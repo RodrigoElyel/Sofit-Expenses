@@ -1,0 +1,1 @@
+export const baseURL = 'https://sofit-mobile-challenge.herokuapp.com';

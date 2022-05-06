@@ -1,8 +1,11 @@
 import styled from "styled-components/native";
 import colors from '../../Styles/colors'
+// TextMask
+import { TextInputMask } from 'react-native-masked-text'
 
 export const Container = styled.TouchableOpacity`
-    height: 60px;
+    width: 90%;
+    min-height: 150px;
     min-width: 250px;
     padding: 12px;
     margin: 10px 0px;
@@ -10,10 +13,18 @@ export const Container = styled.TouchableOpacity`
     background-color: #fff;
     border-radius: 6px;
     border-width: 1px;
-    border-color: ${() => colors.greenStrong};
-    flex-direction: row;
-    justify-content: space-evenly;
+    border-color: ${() => colors.gray};
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: center;
+`
 
+export const TextInput= styled(TextInputMask)`
+    height: 50px;
+    border-radius: 8px;
+    flex-direction: row;
+    border-width: 1px;
+    border-color: #ced4da;
 `
 
 export const Header = styled.View`
