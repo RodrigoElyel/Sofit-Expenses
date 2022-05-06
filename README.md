@@ -1,6 +1,7 @@
 # MyExpenses
 
 Esse projeto se trata de uma aplicação focada no gerenciamento de despesas.
+O tempo necessário para fazer o projeto foi de 2 dias.
 
 # Vídeo de demonstração do APP
 [Video](https://youtu.be/WTprvvJxiiI)
