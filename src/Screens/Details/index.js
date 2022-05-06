@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StatusBar } from 'react-native'
+import { View, TouchableOpacity, StatusBar, Pressable, Keyboard } from 'react-native'
 import React from 'react'
 import { Container, Text } from './styles'
 
@@ -66,16 +66,14 @@ const DetailsScreen = ({ route, navigation }) => {
             valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
         }
 
-        if(valor == 'NaN') elemento.value = '';
-
         return valor
     }
 
     const submitEdit = async () => {
 
-        
 
-        const newValue = formatarMoeda(value).replace(',','.')
+
+        const newValue = formatarMoeda(value).replace(',', '.')
 
         console.log(newValue)
 
@@ -100,7 +98,7 @@ const DetailsScreen = ({ route, navigation }) => {
                 statusBarHeight: StatusBar.currentHeight,
                 floating: true,
             });
-            navigation.navigate('Home', {refresh: !refresh})
+            navigation.navigate('Home', { refresh: !refresh })
         } else {
             showMessage({
                 message: "Falha",
@@ -135,76 +133,79 @@ const DetailsScreen = ({ route, navigation }) => {
 
     return (
         <Screen>
-
-            <Text size={20} bold >{edit ? 'Editar Despesa' : 'Detalhes Da Despesa'}</Text>
-
-            <Input
-                styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
-                styleLabel={{ width: '90%', fontWeight: 'bold' }}
-                placeholder="Descrição..."
-                label='Descrição'
-                value={description}
-                onChange={value => setDescription(value)}
-                editable={edit}
-            />
+            <Pressable style={{ height: "100%" }} onPress={Keyboard.dismiss}>
 
 
-            <Input
-                mask={{
-                    type: "datetime",
-                    options: {
-                        format: "DD/MM/YYYY"
-                    }
-                }}
-                styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
-                styleLabel={{ width: '90%', fontWeight: 'bold' }}
-                placeholder="Data..."
-                label='Data'
-                value={edit ? date : moment(date).add(1, 'days').format('DD/MM/YYYY')}
-                onChange={value => setDate(value)}
-                editable={edit}
-            />
+                <Text size={20} bold >{edit ? 'Editar Despesa' : 'Detalhes Da Despesa'}</Text>
 
-            <Input
-                mask={{
-                    type: "money",
-                    options: {
-                        precision: 2,
-                        separator: ',',
-                        delimiter: '.',
-                        unit: 'R$',
-                        suffixUnit: ''
-                    }
-                }}
-                styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
-                styleLabel={{ width: '90%', fontWeight: 'bold' }}
-                placeholder="R$ ..."
-                label='Valor'
-                value={value}
-                onChange={value => setValue(value)}
-                editable={edit}
-            />
-
-            {edit === false ?
-                <Button
-                    styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.gold }}
-                    label="Editar"
-                    onPress={() => changeEdit()}
+                <Input
+                    styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
+                    styleLabel={{ width: '90%', fontWeight: 'bold' }}
+                    placeholder="Descrição..."
+                    label='Descrição'
+                    value={description}
+                    onChange={value => setDescription(value)}
+                    editable={edit}
                 />
-                :
-                <>
-                    <Button
-                        styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.greenStrong }}
-                        label="Salvar"
-                        onPress={() => submitEdit()}
-                    /><Button
-                        styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.gold }}
-                        label="Defazer"
-                        onPress={() => undoEdit()}
-                    />
-                </>
 
-            }
+
+                <Input
+                    mask={{
+                        type: "datetime",
+                        options: {
+                            format: "DD/MM/YYYY"
+                        }
+                    }}
+                    styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
+                    styleLabel={{ width: '90%', fontWeight: 'bold' }}
+                    placeholder="Data..."
+                    label='Data'
+                    value={edit ? date : moment(date).add(1, 'days').format('DD/MM/YYYY')}
+                    onChange={value => setDate(value)}
+                    editable={edit}
+                />
+
+                <Input
+                    mask={{
+                        type: "money",
+                        options: {
+                            precision: 2,
+                            separator: ',',
+                            delimiter: '.',
+                            unit: 'R$',
+                            suffixUnit: ''
+                        }
+                    }}
+                    styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
+                    styleLabel={{ width: '90%', fontWeight: 'bold' }}
+                    placeholder="R$ ..."
+                    label='Valor'
+                    value={value}
+                    onChange={value => setValue(value)}
+                    editable={edit}
+                />
+
+                {edit === false ?
+                    <Button
+                        styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.gold }}
+                        label="Editar"
+                        onPress={() => changeEdit()}
+                    />
+                    :
+                    <>
+                        <Button
+                            styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.greenStrong }}
+                            label="Salvar"
+                            onPress={() => submitEdit()}
+                        /><Button
+                            styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.gold }}
+                            label="Defazer"
+                            onPress={() => undoEdit()}
+                        />
+                    </>
+
+                }
+            </Pressable>
         </Screen>
     )
 }

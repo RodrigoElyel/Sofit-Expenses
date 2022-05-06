@@ -1,4 +1,4 @@
-import { View, StatusBar, Image } from 'react-native'
+import { View, StatusBar, Image, Pressable, Keyboard, KeyboardAvoidingView } from 'react-native'
 import React from 'react'
 import { Text, Header, Body, MyImage } from './styles'
 
@@ -26,7 +26,7 @@ import colors from '../../Styles/colors'
 const LoginScreen = ({ navigation }) => {
 
   const [email, setEmail] = React.useState('')
-  const [ animation, setAnimation] = React.useState(false)
+  const [animation, setAnimation] = React.useState(false)
 
   console.log(email)
 
@@ -51,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
         navigation.navigate('Home', { refresh: true })
       }, 1000)
 
-      
+
 
     } else {
       showMessage({
@@ -84,39 +84,43 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <Screen style={{ backgroundColor: colors.greenStrong }}>
+      <Pressable style={{ height: "100%" }} onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView behavior="position" enabled>
 
-      <Header>
+          <Header>
 
-        <Text size={30} bold >My Expenses</Text>
-        <MyImage
-          source={require('../../Assets/Images/loginIcon.png')}
-          resizeMode="contain"
-          animation={animation ? 'rotate' : 'pulse'}
-          delay={animation ? 1000 : 100}
-          iterationCount={animation ? 1 : 'infinite'}
-        />
+            <Text size={30} bold >My Expenses</Text>
+            <MyImage
+              source={require('../../Assets/Images/loginIcon.png')}
+              resizeMode="contain"
+              animation={animation ? 'rotate' : 'pulse'}
+              delay={animation ? 1000 : 100}
+              iterationCount={animation ? 1 : 'infinite'}
+            />
 
-      </Header>
+          </Header>
 
 
-      <Body>
-        <Input
-          styleContainer={{ marginTop: 8, width: '90%', alignSelf: 'center' }}
-          styleLabel={{ width: '90%' }}
-          placeholder="Digite seu e-mail"
-          label={'E-mail'}
-          value={email}
-          onChange={value => setEmail(value)}
-          keybordType="email-address"
-        />
-        <Button
-          styleContainer={{ marginTop: 8, width: '90%', alignSelf: 'center', backgroundColor: colors.green }}
-          label="Entrar"
-          onPress={() => submit()}
-        />
+          <Body>
+            <Input
+              styleContainer={{ marginTop: 8, width: '90%', alignSelf: 'center' }}
+              styleLabel={{ width: '90%' }}
+              placeholder="Digite seu e-mail"
+              label={'E-mail'}
+              value={email}
+              onChange={value => setEmail(value)}
+              keybordType="email-address"
+            />
+            <Button
+              styleContainer={{ marginTop: 8, width: '90%', alignSelf: 'center', backgroundColor: colors.green }}
+              label="Entrar"
+              onPress={() => submit()}
+            />
 
-      </Body>
+          </Body>
 
+        </KeyboardAvoidingView>
+      </Pressable>
     </Screen>
   )
 }

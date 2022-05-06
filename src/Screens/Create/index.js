@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StatusBar } from 'react-native'
+import { View, TouchableOpacity, StatusBar, Pressable, Keyboard } from 'react-native'
 import React from 'react'
 import { Container, Text } from './styles'
 
@@ -44,7 +44,6 @@ const CreateScreen = ({ route, navigation }) => {
             valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
         }
 
-        if (valor == 'NaN') elemento.value = '';
 
         return valor
     }
@@ -111,61 +110,63 @@ const CreateScreen = ({ route, navigation }) => {
 
     return (
         <Screen>
-
-            <Text size={20} bold >{'Adicionar Despesa'}</Text>
-
-            <Input
-                styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
-                styleLabel={{ width: '90%', fontWeight: 'bold' }}
-                placeholder="Descrição..."
-                label='Descrição'
-                value={description}
-                onChange={value => setDescription(value)}
-            />
+            <Pressable style={{ height: "100%" }} onPress={Keyboard.dismiss}>
 
 
-            <Input
-                mask={{
-                    type: "datetime",
-                    options: {
-                        format: "DD/MM/YYYY"
-                    }
-                }}
-                styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
-                styleLabel={{ width: '90%', fontWeight: 'bold' }}
-                placeholder="Data..."
-                label='Data'
-                value={date}
-                onChange={value => setDate(value)}
-            />
+                <Text size={20} bold >{'Adicionar Despesa'}</Text>
 
-            <Input
-                mask={{
-                    type: "money",
-                    options: {
-                        precision: 2,
-                        separator: ',',
-                        delimiter: '.',
-                        unit: 'R$',
-                        suffixUnit: ''
-                    }
-                }}
-                styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
-                styleLabel={{ width: '90%', fontWeight: 'bold' }}
-                placeholder="R$ ..."
-                label='Valor'
-                value={value}
-                onChange={value => setValue(value)}
-            />
+                <Input
+                    styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
+                    styleLabel={{ width: '90%', fontWeight: 'bold' }}
+                    placeholder="Descrição..."
+                    label='Descrição'
+                    value={description}
+                    onChange={value => setDescription(value)}
+                />
 
 
-            <Button
-                styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.greenStrong }}
-                label="Salvar"
-                onPress={() => submit()}
-            />
+                <Input
+                    mask={{
+                        type: "datetime",
+                        options: {
+                            format: "DD/MM/YYYY"
+                        }
+                    }}
+                    styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
+                    styleLabel={{ width: '90%', fontWeight: 'bold' }}
+                    placeholder="Data..."
+                    label='Data'
+                    value={date}
+                    onChange={value => setDate(value)}
+                />
+
+                <Input
+                    mask={{
+                        type: "money",
+                        options: {
+                            precision: 2,
+                            separator: ',',
+                            delimiter: '.',
+                            unit: 'R$',
+                            suffixUnit: ''
+                        }
+                    }}
+                    styleContainer={{ width: '90%', alignSelf: 'center', borderWidth: 1, borderColor: colors.greenStrong, marginBottom: 15 }}
+                    styleLabel={{ width: '90%', fontWeight: 'bold' }}
+                    placeholder="R$ ..."
+                    label='Valor'
+                    value={value}
+                    onChange={value => setValue(value)}
+                />
 
 
+                <Button
+                    styleContainer={{ marginTop: 8, alignSelf: 'center', backgroundColor: colors.greenStrong }}
+                    label="Salvar"
+                    onPress={() => submit()}
+                />
+
+            </Pressable>
         </Screen>
     )
 }
