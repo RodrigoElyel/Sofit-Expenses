@@ -1,4 +1,4 @@
-import { View, Image } from 'react-native'
+import { View, Image, Platform } from 'react-native'
 import React from 'react'
 
 // Moment
@@ -11,7 +11,18 @@ import { FontAwesome } from '@expo/vector-icons';
 // Styled-Component
 import { Container, Text, Center, Left, Right } from './styles'
 
+
 const Card = ({ expense, onPress, onPressRemove, styleContainer }) => {
+
+  
+
+  if(Platform.OS === 'android') { // only android needs polyfill
+    require('intl'); // import intl object
+    require('intl/locale-data/jsonp/pt-BR'); // load the required locale details
+  }
+
+  console.log(expense?.value)
+
 
   return (
     <Container

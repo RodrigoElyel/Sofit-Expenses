@@ -35,9 +35,8 @@ const CreateScreen = ({ route, navigation }) => {
 
     const formatarMoeda = (value) => {
 
-     
+        var valor = value + '';
 
-        valor = value + '';
         valor = parseInt(valor.replace(/[\D]+/g, ''));
         valor = valor + '';
         valor = valor.replace(/([0-9]{2})$/g, ",$1");
@@ -58,10 +57,14 @@ const CreateScreen = ({ route, navigation }) => {
         .replace(",", ".");
         // asdsd
 
+
         const formatFloat2 = e
         .replace("R$ ", "")
         .replace(".", "")
         .replace(",", ".");
+      
+        Keyboard.dismiss
+
 
         const newValue = formatarMoeda(value).replace(',', '.')
 
@@ -69,7 +72,7 @@ const CreateScreen = ({ route, navigation }) => {
 
 
         const data = {
-            "date": moment(date).format('YYYY-MM-DD'),
+            "date": moment(date).format('YYYY-DD-MM'),
             "item": description,
             "value": parseFloat(newValue),
             "additionalInfo": {}
@@ -112,6 +115,7 @@ const CreateScreen = ({ route, navigation }) => {
                 floating: true,
             });
         } else {
+            Keyboard.dismiss
             newExpense()
         }
 

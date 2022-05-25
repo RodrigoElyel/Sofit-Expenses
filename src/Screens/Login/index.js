@@ -26,8 +26,6 @@ import colors from '../../Styles/colors'
 const LoginScreen = ({ navigation }) => {
 
   const [email, setEmail] = React.useState('')
-  const [animation, setAnimation] = React.useState(false)
-
   console.log(email)
 
   const autheticate = async () => {
@@ -45,13 +43,7 @@ const LoginScreen = ({ navigation }) => {
 
       await AsyncStorage.setItem('@storage:user', JSON.stringify(response))
 
-      setAnimation(true)
-
-      setTimeout(() => {
-        navigation.navigate('Home', { refresh: true })
-      }, 1000)
-
-
+      navigation.navigate('Home', { refresh: true })
 
     } else {
       showMessage({
@@ -85,7 +77,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <Screen style={{ backgroundColor: colors.greenStrong }}>
       <Pressable style={{ height: "100%" }} onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView behavior="position" enabled>
+        <KeyboardAvoidingView behavior="padding" enabled>
 
           <Header>
 
@@ -93,9 +85,9 @@ const LoginScreen = ({ navigation }) => {
             <MyImage
               source={require('../../Assets/Images/loginIcon.png')}
               resizeMode="contain"
-              animation={animation ? 'rotate' : 'pulse'}
-              delay={animation ? 1000 : 100}
-              iterationCount={animation ? 1 : 'infinite'}
+              animation={'pulse'}
+              delay={100}
+              iterationCount={'infinite'}
             />
 
           </Header>
