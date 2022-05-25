@@ -56,6 +56,12 @@ const CreateScreen = ({ route, navigation }) => {
         .replace("R$ ", "")
         .replace(".", "")
         .replace(",", ".");
+        // asdsd
+
+        const formatFloat2 = e
+        .replace("R$ ", "")
+        .replace(".", "")
+        .replace(",", ".");
 
         const newValue = formatarMoeda(value).replace(',', '.')
 
