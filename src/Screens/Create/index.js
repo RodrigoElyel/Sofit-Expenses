@@ -35,6 +35,8 @@ const CreateScreen = ({ route, navigation }) => {
 
     const formatarMoeda = (value) => {
 
+     
+
         valor = value + '';
         valor = parseInt(valor.replace(/[\D]+/g, ''));
         valor = valor + '';
@@ -50,7 +52,10 @@ const CreateScreen = ({ route, navigation }) => {
 
     const newExpense = async () => {
 
-
+        const formatFloat = e
+        .replace("R$ ", "")
+        .replace(".", "")
+        .replace(",", ".");
 
         const newValue = formatarMoeda(value).replace(',', '.')
 
