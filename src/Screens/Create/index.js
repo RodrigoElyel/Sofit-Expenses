@@ -62,7 +62,7 @@ const CreateScreen = ({ route, navigation }) => {
         .replace("R$ ", "")
         .replace(".", "")
         .replace(",", ".");
-      
+        // commit 
         Keyboard.dismiss
 
 
